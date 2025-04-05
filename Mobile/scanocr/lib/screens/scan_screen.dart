@@ -11,6 +11,25 @@ class ScanScreen extends StatefulWidget {
 
 class _ScanScreenState extends State<ScanScreen> {
   Future<void> scanBarcode() async {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (context) => AlertDialog(
+        backgroundColor: Colors.white,
+        content: Row(
+          children: const [
+            CircularProgressIndicator(color: Colors.deepPurple),
+            SizedBox(width: 20),
+            Text('Iniciando o scanner...', style: TextStyle(color: Colors.black)),
+          ],
+        ),
+      ),
+    );
+
+    await Future.delayed(const Duration(seconds: 3));
+
+    Navigator.of(context).pop();
+
     String barcode = await BarcodeScannerService.scanBarcode();
 
     if (!mounted) return;
