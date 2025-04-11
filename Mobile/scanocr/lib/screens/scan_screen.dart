@@ -26,7 +26,7 @@ class _ScanScreenState extends State<ScanScreen> {
       ),
     );
 
-    await Future.delayed(const Duration(seconds: 3));
+    await Future.delayed(const Duration(milliseconds: 1500));
 
     Navigator.of(context).pop();
 
@@ -34,7 +34,7 @@ class _ScanScreenState extends State<ScanScreen> {
 
     if (!mounted) return;
 
-    if (barcode != 'Cancelado') {
+    if (barcode != 'Cancelado' && barcode.isNotEmpty) {
       Navigator.push(
         context,
         MaterialPageRoute(builder: (context) => ResultScreen(code: barcode)),
