@@ -7,7 +7,7 @@ class ResultScreen extends StatefulWidget {
   const ResultScreen({super.key, required this.code});
 
   @override
-  _ResultScreenState createState() => _ResultScreenState();
+  State<ResultScreen> createState() => _ResultScreenState();
 }
 
 class _ResultScreenState extends State<ResultScreen> {
@@ -39,13 +39,19 @@ class _ResultScreenState extends State<ResultScreen> {
       body: Padding(
         padding: const EdgeInsets.all(20.0),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             const Icon(Icons.qr_code_scanner, size: 100, color: Colors.deepPurple),
             const SizedBox(height: 20),
 
             Text(
               'Código Escaneado',
-              style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: Colors.deepPurple[700]),
+              style: TextStyle(
+                fontSize: 22,
+                fontWeight: FontWeight.bold,
+                color: Colors.deepPurple[700],
+              ),
+              textAlign: TextAlign.center,
             ),
             const SizedBox(height: 8),
 
@@ -55,7 +61,13 @@ class _ResultScreenState extends State<ResultScreen> {
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(12),
-                boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 4, offset: Offset(0, 2))],
+                boxShadow: const [
+                  BoxShadow(
+                    color: Colors.black12,
+                    blurRadius: 4,
+                    offset: Offset(0, 2),
+                  ),
+                ],
               ),
               child: Text(
                 widget.code,
@@ -66,8 +78,13 @@ class _ResultScreenState extends State<ResultScreen> {
 
             const SizedBox(height: 30),
             Text(
-              'Texto OCR',
-              style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: Colors.deepPurple[700]),
+              'Enviando para o Banco',
+              style: TextStyle(
+                fontSize: 22,
+                fontWeight: FontWeight.bold,
+                color: Colors.deepPurple[700],
+              ),
+              textAlign: TextAlign.center,
             ),
             const SizedBox(height: 8),
 
@@ -78,31 +95,47 @@ class _ResultScreenState extends State<ResultScreen> {
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(12),
-                boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 4, offset: Offset(0, 2))],
+                boxShadow: const [
+                  BoxShadow(
+                    color: Colors.black12,
+                    blurRadius: 4,
+                    offset: Offset(0, 2),
+                  ),
+                ],
               ),
               child: Text(
                 recognizedText,
-                style: const TextStyle(fontSize: 16, fontFamily: 'Courier'), 
+                style: const TextStyle(
+                  fontSize: 16,
+                  fontFamily: 'Courier',
+                ),
                 textAlign: TextAlign.center,
               ),
             ),
 
             const Spacer(),
+
             SizedBox(
               width: double.infinity,
               child: ElevatedButton.icon(
                 onPressed: () => Navigator.pop(context),
-                icon: const Icon(Icons.arrow_back),
-                label: const Text('Voltar'),
+                icon: const Icon(Icons.arrow_back, color: Colors.white),
+                label: const Text(
+                  'Voltar',
+                  style: TextStyle(color: Colors.white),
+                ),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.deepPurple,
                   padding: const EdgeInsets.symmetric(vertical: 14),
                   textStyle: const TextStyle(fontSize: 18),
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(30),
+                  ),
                   elevation: 4,
                 ),
               ),
             ),
+
             const SizedBox(height: 20),
           ],
         ),
