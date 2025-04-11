@@ -83,7 +83,11 @@ class _OCRScanScreenState extends State<OCRScanScreen> {
                   icon: const Icon(Icons.camera_alt, color: Colors.white),
                   label: const Text(
                     'Tirar Foto da Etiqueta',
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    ),
                   ),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.deepPurple,
@@ -107,7 +111,10 @@ class _OCRScanScreenState extends State<OCRScanScreen> {
                                 extractedText.isEmpty
                                     ? 'O texto escaneado aparecerá aqui.'
                                     : extractedText,
-                                style: const TextStyle(fontSize: 16, color: Colors.black87),
+                                style: const TextStyle(
+                                  fontSize: 16,
+                                  color: Colors.black, 
+                                ),
                                 textAlign: TextAlign.center,
                               ),
                             ),
