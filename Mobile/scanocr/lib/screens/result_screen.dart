@@ -12,17 +12,25 @@ class ResultScreen extends StatefulWidget {
 
 class _ResultScreenState extends State<ResultScreen> {
   String recognizedText = 'Reconhecendo...';
+  String bestMatchFile = '';
+  double similarity = 0.0;
 
   @override
   void initState() {
     super.initState();
-    recognizeText();
+    recognizeTextAndCompare();
   }
 
-  Future<void> recognizeText() async {
-    String text = await OCRService.recognizeTextFromImage(widget.code);
+  Future<void> recognizeTextAndCompare() async {
+    final result = await OCRService.recognizeAndCompare(
+      widget.code,
+      'lib/assets/references/dataset_estampas',
+    );
+
     setState(() {
-      recognizedText = text;
+      recognizedText = result['textoEscaneado'] ?? 'Nenhum texto encontrado';
+      bestMatchFile = result['melhorCorrespondencia']?.split('/').last ?? '';
+      similarity = (result['similaridade'] ?? 0.0) * 100;
     });
   }
 
@@ -78,7 +86,7 @@ class _ResultScreenState extends State<ResultScreen> {
 
             const SizedBox(height: 30),
             Text(
-              'Enviando para o Banco',
+              'Texto Reconhecido',
               style: TextStyle(
                 fontSize: 22,
                 fontWeight: FontWeight.bold,
@@ -112,6 +120,27 @@ class _ResultScreenState extends State<ResultScreen> {
                 textAlign: TextAlign.center,
               ),
             ),
+
+            const SizedBox(height: 20),
+
+            if (bestMatchFile.isNotEmpty) ...[
+              Text(
+                'Melhor Correspondência: $bestMatchFile',
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.deepPurple[700],
+                ),
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(height: 8),
+              Text(
+                'Similaridade: ${similarity.toStringAsFixed(2)}%',
+                style: const TextStyle(fontSize: 16),
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(height: 30),
+            ],
 
             const Spacer(),
 
