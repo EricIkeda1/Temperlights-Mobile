@@ -10,7 +10,7 @@ class OCRService {
 
     final text = recognizedText.text.toUpperCase();
 
-    return {
+    final result = <String, String>{
       'empresa': _extract(text, ['EMPRESA', 'TEMPERLÂNDIA', 'TEMPERLANDIA', 'TEMPERLÂMPIA']),
       'grupo': _extract(text, ['GRUPO']),
       'secao': _extract(text, ['SEÇÃO', 'SECAO']),
@@ -23,6 +23,9 @@ class OCRService {
       'localidade': _extract(text, ['LOCALIDADE', 'CIDADE']),
       'material': _extract(text, ['MATERIAL']),
     };
+
+    result.removeWhere((_, value) => value.isEmpty);
+    return result;
   }
 
   static String _extract(String fullText, List<String> keys, {String? suffix}) {
@@ -34,6 +37,17 @@ class OCRService {
       }
     }
     return '';
+  }
+
+  static Future<String> recognizeTextFromImage(String imagePath) async {
+    final textRecognizer = TextRecognizer();
+    final inputImage = InputImage.fromFilePath(imagePath);
+    final RecognizedText recognizedText = await textRecognizer.processImage(inputImage);
+    textRecognizer.close();
+
+    return recognizedText.text.trim().isEmpty
+        ? 'Nenhum texto encontrado'
+        : recognizedText.text.trim();
   }
 
   static Future<Map<String, dynamic>> recognizeAndCompare(
@@ -65,17 +79,6 @@ class OCRService {
       'melhorCorrespondencia': bestMatchFile,
       'similaridade': bestSimilarity,
     };
-  }
-
-  static Future<String> recognizeTextFromImage(String imagePath) async {
-    final textRecognizer = TextRecognizer();
-    final inputImage = InputImage.fromFilePath(imagePath);
-    final RecognizedText recognizedText = await textRecognizer.processImage(inputImage);
-    textRecognizer.close();
-
-    return recognizedText.text.trim().isEmpty
-        ? 'Nenhum texto encontrado'
-        : recognizedText.text.trim();
   }
 
   static double _compareStrings(String a, String b) {
