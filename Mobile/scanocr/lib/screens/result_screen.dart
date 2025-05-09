@@ -51,7 +51,6 @@ class _ResultScreenState extends State<ResultScreen> {
           children: [
             const Icon(Icons.qr_code_scanner, size: 100, color: Colors.deepPurple),
             const SizedBox(height: 20),
-
             Text(
               'Código Escaneado',
               style: TextStyle(
@@ -62,7 +61,6 @@ class _ResultScreenState extends State<ResultScreen> {
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 8),
-
             Container(
               padding: const EdgeInsets.all(14),
               margin: const EdgeInsets.symmetric(horizontal: 8),
@@ -83,7 +81,6 @@ class _ResultScreenState extends State<ResultScreen> {
                 textAlign: TextAlign.center,
               ),
             ),
-
             const SizedBox(height: 30),
             Text(
               'Texto Reconhecido',
@@ -95,7 +92,6 @@ class _ResultScreenState extends State<ResultScreen> {
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 8),
-
             Container(
               width: double.infinity,
               padding: const EdgeInsets.all(16),
@@ -120,9 +116,7 @@ class _ResultScreenState extends State<ResultScreen> {
                 textAlign: TextAlign.center,
               ),
             ),
-
             const SizedBox(height: 20),
-
             if (bestMatchFile.isNotEmpty) ...[
               Text(
                 'Melhor Correspondência: $bestMatchFile',
@@ -141,9 +135,30 @@ class _ResultScreenState extends State<ResultScreen> {
               ),
               const SizedBox(height: 30),
             ],
-
             const Spacer(),
-
+            SizedBox(
+              width: double.infinity,
+              child: ElevatedButton.icon(
+                onPressed: () {
+                  print('Dados enviados');
+                },
+                icon: const Icon(Icons.send, color: Colors.white),
+                label: const Text(
+                  'Enviar os Dados',
+                  style: TextStyle(color: Colors.white),
+                ),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.deepPurple,
+                  padding: const EdgeInsets.symmetric(vertical: 14),
+                  textStyle: const TextStyle(fontSize: 18),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(30),
+                  ),
+                  elevation: 4,
+                ),
+              ),
+            ),
+            const SizedBox(height: 12),
             SizedBox(
               width: double.infinity,
               child: ElevatedButton.icon(
@@ -164,7 +179,6 @@ class _ResultScreenState extends State<ResultScreen> {
                 ),
               ),
             ),
-
             const SizedBox(height: 20),
           ],
         ),
