@@ -33,6 +33,24 @@ class _OCRScanScreenState extends State<OCRScanScreen> {
     }
   }
 
+  void _sendData() {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('Dados enviados'),
+        content: const Text('Os dados foram enviados com sucesso.'),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text('OK'),
+          ),
+        ],
+      ),
+    );
+
+    print('Texto enviado: $extractedText');
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -54,7 +72,6 @@ class _OCRScanScreenState extends State<OCRScanScreen> {
           child: Padding(
             padding: const EdgeInsets.all(20.0),
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 if (imageFile != null)
                   Card(
@@ -96,28 +113,54 @@ class _OCRScanScreenState extends State<OCRScanScreen> {
                   ),
                 ),
 
+                const SizedBox(height: 20),
+
+                imageFile != null
+                    ? ElevatedButton.icon(
+                        onPressed: _sendData,
+                        icon: const Icon(Icons.send, color: Colors.white),
+                        label: const Text(
+                          'Enviar Dados',
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                          ),
+                        ),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.deepPurple,
+                          padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 14),
+                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                        ),
+                      )
+                    : Container(), 
+
                 const SizedBox(height: 30),
 
                 isLoading
                     ? const CircularProgressIndicator()
                     : Expanded(
-                        child: Card(
-                          elevation: 4,
-                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-                          child: Padding(
-                            padding: const EdgeInsets.all(16.0),
-                            child: SingleChildScrollView(
-                              child: Text(
-                                extractedText.isEmpty
-                                    ? 'O texto escaneado aparecerá aqui.'
-                                    : extractedText,
-                                style: const TextStyle(
-                                  fontSize: 16,
-                                  color: Colors.black, 
+                        child: SingleChildScrollView(
+                          child: Column(
+                            children: [
+                              Card(
+                                elevation: 4,
+                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(16.0),
+                                  child: Text(
+                                    extractedText.isEmpty
+                                        ? 'O texto escaneado aparecerá aqui.'
+                                        : extractedText,
+                                    style: const TextStyle(
+                                      fontSize: 16,
+                                      color: Colors.black,
+                                    ),
+                                    textAlign: TextAlign.center,
+                                  ),
                                 ),
-                                textAlign: TextAlign.center,
                               ),
-                            ),
+                            ],
                           ),
                         ),
                       ),
