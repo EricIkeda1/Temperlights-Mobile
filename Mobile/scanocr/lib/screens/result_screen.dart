@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:scanocr/services/ocr_service.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';  
 
 class ResultScreen extends StatefulWidget {
   final String code;
@@ -14,6 +15,7 @@ class _ResultScreenState extends State<ResultScreen> {
   String recognizedText = 'Reconhecendo...';
   String bestMatchFile = '';
   double similarity = 0.0;
+  bool isSending = false; 
 
   @override
   void initState() {
@@ -32,6 +34,32 @@ class _ResultScreenState extends State<ResultScreen> {
       bestMatchFile = result['melhorCorrespondencia']?.split('/').last ?? '';
       similarity = (result['similaridade'] ?? 0.0) * 100;
     });
+  }
+
+  Future<void> enviarDadosParaSupabase() async {
+    setState(() {
+      isSending = true;
+    });
+
+    final supabase = Supabase.instance.client;
+
+    try {
+      await supabase.from('testes').insert({
+        'cod': widget.code,
+      });
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Dados enviados com sucesso!')),
+      );
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Erro ao enviar dados: $e')),
+      );
+    } finally {
+      setState(() {
+        isSending = false;
+      });
+    }
   }
 
   @override
@@ -139,13 +167,17 @@ class _ResultScreenState extends State<ResultScreen> {
             SizedBox(
               width: double.infinity,
               child: ElevatedButton.icon(
-                onPressed: () {
-                  print('Dados enviados');
-                },
-                icon: const Icon(Icons.send, color: Colors.white),
-                label: const Text(
-                  'Enviar os Dados', //Codigo do botão para enviar os dados
-                  style: TextStyle(color: Colors.white),
+                onPressed: isSending ? null : enviarDadosParaSupabase,
+                icon: isSending
+                    ? const SizedBox(
+                        width: 24,
+                        height: 24,
+                        child: CircularProgressIndicator(color: Colors.white, strokeWidth: 2),
+                      )
+                    : const Icon(Icons.send, color: Colors.white),
+                label: Text(
+                  isSending ? 'Enviando...' : 'Enviar os Dados',
+                  style: const TextStyle(color: Colors.white),
                 ),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.deepPurple,

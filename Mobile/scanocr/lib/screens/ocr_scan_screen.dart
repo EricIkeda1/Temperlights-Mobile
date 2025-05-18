@@ -125,7 +125,7 @@ class _OCRScanScreenState extends State<OCRScanScreen> {
                           onPressed: _sendData,
                           icon: const Icon(Icons.send, color: Colors.white),
                           label: const Text(
-                            'Enviar Dados', //Codigo do botão para enviar os dados
+                            'Enviar Dados',
                             style: TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.bold,
