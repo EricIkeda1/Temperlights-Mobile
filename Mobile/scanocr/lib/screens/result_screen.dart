@@ -144,7 +144,7 @@ class _ResultScreenState extends State<ResultScreen> {
                 },
                 icon: const Icon(Icons.send, color: Colors.white),
                 label: const Text(
-                  'Enviar os Dados',
+                  'Enviar os Dados', //Codigo do botão para enviar os dados
                   style: TextStyle(color: Colors.white),
                 ),
                 style: ElevatedButton.styleFrom(
