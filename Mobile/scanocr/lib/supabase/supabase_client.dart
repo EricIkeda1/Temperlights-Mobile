@@ -1,13 +1,13 @@
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class SupabaseManager {
-  static const String supabaseUrl = ''; //url supabase 
-  static const String supabaseAnonKey = "";
+  static const String _supabaseUrl = '';
+  static const String _supabaseAnonKey = '';
 
   static Future<void> init() async {
     await Supabase.initialize(
-      url: supabaseUrl,
-      anonKey: supabaseAnonKey,
+      url: _supabaseUrl,
+      anonKey: _supabaseAnonKey,
     );
   }
 

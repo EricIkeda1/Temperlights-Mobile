@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:scanocr/screens/home_screen.dart';
+import 'package:scanocr/supabase/supabase_client.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  await Supabase.initialize(
-    url: '', 
-    anonKey: '',
-  );
+  try {
+    await SupabaseManager.init();
+  } catch (e, stackTrace) {
+    debugPrint('Erro ao inicializar Supabase: $e');
+    debugPrintStack(stackTrace: stackTrace);
+  }
 
   runApp(const ScanOCRApp());
 }
