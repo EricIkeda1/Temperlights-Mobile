@@ -18,7 +18,7 @@ class _ScanScreenState extends State<ScanScreen> {
         backgroundColor: Colors.white,
         content: Row(
           children: const [
-            CircularProgressIndicator(color: Color(0xFFFF6F00)), 
+            CircularProgressIndicator(color: Color(0xFFF37021)), 
             SizedBox(width: 20),
             Text(
               'Iniciando o scanner...',
@@ -50,7 +50,7 @@ class _ScanScreenState extends State<ScanScreen> {
       appBar: AppBar(
         title: const Text('Escanear Código de Barras'),
         centerTitle: true,
-        backgroundColor: Color(0xFFFF6F00), 
+        backgroundColor: Color(0xFFF37021), 
         elevation: 4,
       ),
       body: Container(
@@ -68,7 +68,7 @@ class _ScanScreenState extends State<ScanScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Icon(Icons.qr_code_scanner, size: 120, color: Color(0xFFFF6F00)),
+            const Icon(Icons.qr_code_scanner, size: 120, color: Color(0xFFF37021)),
             const SizedBox(height: 20),
             const Text(
               'Aproxime o código de barras ou QR Code da câmera para escanear.',
@@ -94,7 +94,7 @@ class _ScanScreenState extends State<ScanScreen> {
                   ),
                 ),
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Color(0xFFFF6F00),
+                  backgroundColor: Color(0xFFF37021),
                   padding: const EdgeInsets.symmetric(vertical: 15),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10),

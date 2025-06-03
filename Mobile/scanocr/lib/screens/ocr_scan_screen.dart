@@ -56,7 +56,7 @@ class _OCRScanScreenState extends State<OCRScanScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Escanear Etiqueta Completa'),
-        backgroundColor: Colors.deepPurple,
+        backgroundColor: Color(0xFFF37021), 
         centerTitle: true,
         elevation: 4,
       ),
@@ -90,7 +90,7 @@ class _OCRScanScreenState extends State<OCRScanScreen> {
                 else
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 20),
-                    child: Icon(Icons.image_search, size: 100, color: Colors.deepPurple.shade200),
+                    child: Icon(Icons.image_search, size: 100, color: Color(0xFFF37021)), 
                   ),
 
                 const SizedBox(height: 20),
@@ -109,7 +109,7 @@ class _OCRScanScreenState extends State<OCRScanScreen> {
                       ),
                     ),
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.deepPurple,
+                      backgroundColor: Color(0xFFF37021),
                       padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 14),
                       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                     ),
@@ -133,7 +133,7 @@ class _OCRScanScreenState extends State<OCRScanScreen> {
                             ),
                           ),
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.deepPurple,
+                            backgroundColor: Color(0xFFF37021), 
                             padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 14),
                             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                           ),

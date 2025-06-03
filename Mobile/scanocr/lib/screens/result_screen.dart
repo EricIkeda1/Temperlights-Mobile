@@ -64,11 +64,13 @@ class _ResultScreenState extends State<ResultScreen> {
 
   @override
   Widget build(BuildContext context) {
+    const mainColor = Color(0xFFF37021); 
+
     return Scaffold(
       backgroundColor: Colors.grey[100],
       appBar: AppBar(
         title: const Text('Resultado OCR'),
-        backgroundColor: Colors.deepPurple,
+        backgroundColor: mainColor,
         centerTitle: true,
         elevation: 2,
       ),
@@ -77,14 +79,14 @@ class _ResultScreenState extends State<ResultScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            const Icon(Icons.qr_code_scanner, size: 100, color: Colors.deepPurple),
+            const Icon(Icons.qr_code_scanner, size: 100, color: mainColor),
             const SizedBox(height: 20),
-            Text(
+            const Text(
               'Código Escaneado',
               style: TextStyle(
                 fontSize: 22,
                 fontWeight: FontWeight.bold,
-                color: Colors.deepPurple[700],
+                color: mainColor,
               ),
               textAlign: TextAlign.center,
             ),
@@ -110,12 +112,12 @@ class _ResultScreenState extends State<ResultScreen> {
               ),
             ),
             const SizedBox(height: 30),
-            Text(
+            const Text(
               'Texto Reconhecido',
               style: TextStyle(
                 fontSize: 22,
                 fontWeight: FontWeight.bold,
-                color: Colors.deepPurple[700],
+                color: mainColor,
               ),
               textAlign: TextAlign.center,
             ),
@@ -148,10 +150,10 @@ class _ResultScreenState extends State<ResultScreen> {
             if (bestMatchFile.isNotEmpty) ...[
               Text(
                 'Melhor Correspondência: $bestMatchFile',
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
-                  color: Colors.deepPurple[700],
+                  color: mainColor,
                 ),
                 textAlign: TextAlign.center,
               ),
@@ -180,7 +182,7 @@ class _ResultScreenState extends State<ResultScreen> {
                   style: const TextStyle(color: Colors.white),
                 ),
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.deepPurple,
+                  backgroundColor: mainColor,
                   padding: const EdgeInsets.symmetric(vertical: 14),
                   textStyle: const TextStyle(fontSize: 18),
                   shape: RoundedRectangleBorder(
@@ -201,7 +203,7 @@ class _ResultScreenState extends State<ResultScreen> {
                   style: TextStyle(color: Colors.white),
                 ),
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.deepPurple,
+                  backgroundColor: mainColor,
                   padding: const EdgeInsets.symmetric(vertical: 14),
                   textStyle: const TextStyle(fontSize: 18),
                   shape: RoundedRectangleBorder(
