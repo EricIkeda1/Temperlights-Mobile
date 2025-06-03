@@ -18,16 +18,18 @@ class _ScanScreenState extends State<ScanScreen> {
         backgroundColor: Colors.white,
         content: Row(
           children: const [
-            CircularProgressIndicator(color: Colors.deepPurple),
+            CircularProgressIndicator(color: Color(0xFFFF6F00)), 
             SizedBox(width: 20),
-            Text('Iniciando o scanner...', style: TextStyle(color: Colors.black)),
+            Text(
+              'Iniciando o scanner...',
+              style: TextStyle(color: Colors.black),
+            ),
           ],
         ),
       ),
     );
 
     await Future.delayed(const Duration(milliseconds: 1500));
-
     Navigator.of(context).pop();
 
     String barcode = await BarcodeScannerService.scanBarcode();
@@ -47,57 +49,61 @@ class _ScanScreenState extends State<ScanScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Escanear Código de Barras'),
-        backgroundColor: Colors.deepPurple,
         centerTitle: true,
+        backgroundColor: Color(0xFFFF6F00), 
+        elevation: 4,
       ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Expanded(
-            child: Container(
-              decoration: const BoxDecoration(
-                gradient: LinearGradient(
-                  colors: [Colors.deepPurple, Colors.purpleAccent],
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
+      body: Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            colors: [
+              Color(0xFFFFE0B2),
+              Color(0xFFFFB74D),
+            ],
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+          ),
+        ),
+        padding: const EdgeInsets.all(20.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Icon(Icons.qr_code_scanner, size: 120, color: Color(0xFFFF6F00)),
+            const SizedBox(height: 20),
+            const Text(
+              'Aproxime o código de barras ou QR Code da câmera para escanear.',
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.w500,
+                color: Colors.black87,
+              ),
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: 30),
+            SizedBox(
+              width: double.infinity,
+              child: ElevatedButton.icon(
+                onPressed: scanBarcode,
+                icon: const Icon(Icons.camera_alt, color: Colors.white),
+                label: const Text(
+                  'Iniciar Scanner',
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
+                ),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Color(0xFFFF6F00),
+                  padding: const EdgeInsets.symmetric(vertical: 15),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
                 ),
               ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Icon(Icons.qr_code_scanner, size: 120, color: Colors.white),
-                  const SizedBox(height: 20),
-                  const Text(
-                    'Aproxime o código de barras ou QR Code da câmera para escanear.',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.w500,
-                      color: Colors.white,
-                    ),
-                  ),
-                  const SizedBox(height: 30),
-                  ElevatedButton.icon(
-                    onPressed: scanBarcode,
-                    icon: const Icon(Icons.camera_alt, color: Colors.white),
-                    label: const Text(
-                      'Iniciar Scanner',
-                      style: TextStyle(color: Colors.white),
-                    ),
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.deepPurple.shade700,
-                      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 14),
-                      textStyle: const TextStyle(fontSize: 18),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
