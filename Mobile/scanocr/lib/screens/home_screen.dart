@@ -11,7 +11,7 @@ class HomeScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Temperlights - ScanOCR'),
         centerTitle: true,
-        backgroundColor: Colors.deepPurple,
+        backgroundColor: Color(0xFFF37021),
         elevation: 4,
       ),
       body: Padding(
@@ -23,7 +23,7 @@ class HomeScreen extends StatelessWidget {
             Icon(
               Icons.qr_code_scanner,
               size: 120,
-              color: Colors.deepPurple,
+              color: Color(0xFFF37021),
             ),
             const SizedBox(height: 20),
             const Text(
@@ -53,7 +53,7 @@ class HomeScreen extends StatelessWidget {
                 },
                 style: ElevatedButton.styleFrom(
                   padding: const EdgeInsets.symmetric(vertical: 15),
-                  backgroundColor: Colors.deepPurple,
+                  backgroundColor: Color(0xFFF37021),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10),
                   ),
@@ -76,7 +76,7 @@ class HomeScreen extends StatelessWidget {
                 },
                 style: ElevatedButton.styleFrom(
                   padding: const EdgeInsets.symmetric(vertical: 15),
-                  backgroundColor: Colors.deepPurple.shade400,
+                  backgroundColor: Color(0xFFF37021).withOpacity(0.9), 
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10),
                   ),
