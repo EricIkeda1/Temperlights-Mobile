@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:scanocr/services/ocr_service.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';  
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 class ResultScreen extends StatefulWidget {
   final String code;
@@ -15,12 +15,14 @@ class _ResultScreenState extends State<ResultScreen> {
   String recognizedText = 'Reconhecendo...';
   String bestMatchFile = '';
   double similarity = 0.0;
-  bool isSending = false; 
+  bool isSending = false;
+  Map<String, dynamic>? supabaseData;
 
   @override
   void initState() {
     super.initState();
     recognizeTextAndCompare();
+    buscarDadosDoCodigo();
   }
 
   Future<void> recognizeTextAndCompare() async {
@@ -36,6 +38,34 @@ class _ResultScreenState extends State<ResultScreen> {
     });
   }
 
+  Future<void> buscarDadosDoCodigo() async {
+    final supabase = Supabase.instance.client;
+    try {
+      final response = await supabase
+          .from('testes2')
+          .select('id, producao, IDMaquina')
+          .eq('id', widget.code) 
+          .maybeSingle();
+
+      if (response != null) {
+        setState(() {
+          supabaseData = response;
+        });
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Produção: ${response['producao']}, Máquina: ${response['IDMaquina']}')),
+        );
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Nenhum dado encontrado para este código.')),
+        );
+      }
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Erro ao buscar dados: $e')),
+      );
+    }
+  }
+
   Future<void> enviarDadosParaSupabase() async {
     setState(() {
       isSending = true;
@@ -44,10 +74,7 @@ class _ResultScreenState extends State<ResultScreen> {
     final supabase = Supabase.instance.client;
 
     try {
-      await supabase.from('testes').insert({
-        'cod': widget.code,
-      });
-
+      await supabase.from('testes').insert({'cod': widget.code});
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Dados enviados com sucesso!')),
       );
@@ -64,7 +91,7 @@ class _ResultScreenState extends State<ResultScreen> {
 
   @override
   Widget build(BuildContext context) {
-    const mainColor = Color(0xFFF37021); 
+    const mainColor = Color(0xFFF37021);
 
     return Scaffold(
       backgroundColor: Colors.grey[100],
@@ -83,11 +110,7 @@ class _ResultScreenState extends State<ResultScreen> {
             const SizedBox(height: 20),
             const Text(
               'Código Escaneado',
-              style: TextStyle(
-                fontSize: 22,
-                fontWeight: FontWeight.bold,
-                color: mainColor,
-              ),
+              style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: mainColor),
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 8),
@@ -97,13 +120,7 @@ class _ResultScreenState extends State<ResultScreen> {
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(12),
-                boxShadow: const [
-                  BoxShadow(
-                    color: Colors.black12,
-                    blurRadius: 4,
-                    offset: Offset(0, 2),
-                  ),
-                ],
+                boxShadow: const [BoxShadow(color: Colors.black12, blurRadius: 4, offset: Offset(0, 2))],
               ),
               child: Text(
                 widget.code,
@@ -114,11 +131,7 @@ class _ResultScreenState extends State<ResultScreen> {
             const SizedBox(height: 30),
             const Text(
               'Texto Reconhecido',
-              style: TextStyle(
-                fontSize: 22,
-                fontWeight: FontWeight.bold,
-                color: mainColor,
-              ),
+              style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: mainColor),
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 8),
@@ -129,20 +142,11 @@ class _ResultScreenState extends State<ResultScreen> {
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(12),
-                boxShadow: const [
-                  BoxShadow(
-                    color: Colors.black12,
-                    blurRadius: 4,
-                    offset: Offset(0, 2),
-                  ),
-                ],
+                boxShadow: const [BoxShadow(color: Colors.black12, blurRadius: 4, offset: Offset(0, 2))],
               ),
               child: Text(
                 recognizedText,
-                style: const TextStyle(
-                  fontSize: 16,
-                  fontFamily: 'Courier',
-                ),
+                style: const TextStyle(fontSize: 16, fontFamily: 'Courier'),
                 textAlign: TextAlign.center,
               ),
             ),
@@ -150,16 +154,25 @@ class _ResultScreenState extends State<ResultScreen> {
             if (bestMatchFile.isNotEmpty) ...[
               Text(
                 'Melhor Correspondência: $bestMatchFile',
-                style: const TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                  color: mainColor,
-                ),
+                style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: mainColor),
                 textAlign: TextAlign.center,
               ),
               const SizedBox(height: 8),
               Text(
                 'Similaridade: ${similarity.toStringAsFixed(2)}%',
+                style: const TextStyle(fontSize: 16),
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(height: 30),
+            ],
+            if (supabaseData != null) ...[
+              Text(
+                'Produção: ${supabaseData!['producao']}',
+                style: const TextStyle(fontSize: 16),
+                textAlign: TextAlign.center,
+              ),
+              Text(
+                'ID Máquina: ${supabaseData!['IDMaquina']}',
                 style: const TextStyle(fontSize: 16),
                 textAlign: TextAlign.center,
               ),
@@ -185,9 +198,7 @@ class _ResultScreenState extends State<ResultScreen> {
                   backgroundColor: mainColor,
                   padding: const EdgeInsets.symmetric(vertical: 14),
                   textStyle: const TextStyle(fontSize: 18),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(30),
-                  ),
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
                   elevation: 4,
                 ),
               ),
@@ -198,17 +209,12 @@ class _ResultScreenState extends State<ResultScreen> {
               child: ElevatedButton.icon(
                 onPressed: () => Navigator.pop(context),
                 icon: const Icon(Icons.arrow_back, color: Colors.white),
-                label: const Text(
-                  'Voltar',
-                  style: TextStyle(color: Colors.white),
-                ),
+                label: const Text('Voltar', style: TextStyle(color: Colors.white)),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: mainColor,
                   padding: const EdgeInsets.symmetric(vertical: 14),
                   textStyle: const TextStyle(fontSize: 18),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(30),
-                  ),
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
                   elevation: 4,
                 ),
               ),
