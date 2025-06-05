@@ -22,12 +22,17 @@ class _MachineSwapScreenState extends State<MachineSwapScreen> {
 
   Future<void> buscarDadosDoCodigo() async {
     final supabase = Supabase.instance.client;
+
+    print('🔍 Buscando dados para o código: ${widget.code}');
+
     try {
       final response = await supabase
           .from('testes2')
           .select('id, producao, IDMaquina')
           .eq('id', widget.code)
           .maybeSingle();
+
+      print('Resposta do Supabase: $response');
 
       if (response != null) {
         setState(() {
@@ -41,6 +46,7 @@ class _MachineSwapScreenState extends State<MachineSwapScreen> {
         );
       }
     } catch (e) {
+      print('Erro ao buscar dados: $e');
       setState(() => isLoading = false);
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Erro ao buscar dados: $e')),
