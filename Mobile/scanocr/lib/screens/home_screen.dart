@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:scanocr/screens/scan_screen.dart';
-import 'package:scanocr/screens/ocr_scan_screen.dart';
-import 'package:scanocr/screens/machine_swap_screen.dart'; 
+import 'package:scanocr/screens/machine_swap_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -61,29 +60,6 @@ class HomeScreen extends StatelessWidget {
                 ),
                 child: const Text(
                   'Escanear Código de Barras',
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white),
-                ),
-              ),
-            ),
-            const SizedBox(height: 20),
-            SizedBox(
-              width: double.infinity,
-              child: ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => const OCRScanScreen()),
-                  );
-                },
-                style: ElevatedButton.styleFrom(
-                  padding: const EdgeInsets.symmetric(vertical: 15),
-                  backgroundColor: Color(0xFFF37021).withOpacity(0.9),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                ),
-                child: const Text(
-                  'Escanear Etiqueta Completa',
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white),
                 ),
               ),
