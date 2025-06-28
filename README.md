@@ -20,12 +20,14 @@ A aplicação está integrada ao **Supabase** para autenticação de usuários e
 
 # 1. Clone o repositório
 git clone https://github.com/EricIkeda1/Temperlights-Mobile.git
+
+# 2. Navegue até a pasta do projeto
 cd Temperlights-Mobile/Mobile/scanocr/
 
-# 2. Instale as dependências
+# 3. Instale as dependências
 flutter pub get
 
-# 3. Execute o app no emulador ou dispositivo
+# 4. Execute o app no emulador ou dispositivo
 flutter run
 
 # Executar no navegador (Web)
