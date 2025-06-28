@@ -64,4 +64,3 @@ scanocr/
 ├── README.md                      Este arquivo
 └── .gitignore, .metadata          Arquivos de controle do projeto
 
----
