@@ -52,13 +52,13 @@ scanocr/
 │   ├── services/                  Implementação dos serviços de OCR e código de barras
 │   ├── supabase/                  Cliente Supabase para autenticação e dados
 │   └── assets/references/         Dataset de imagens utilizadas pelo OCR
-├── android/                       Código nativo para Android (Kotlin)
-├── ios/                           Projeto iOS (Swift)
-├── linux/                         Suporte e build para Linux
-├── macos/                         Suporte para macOS
-├── windows/                       Projeto desktop para Windows
-├── web/                           Arquivos para execução via navegador
-├── test/                          Testes automatizados (unitários e de widget)
+├── android/                    
+├── ios/                    
+├── linux/                   
+├── macos/                  
+├── windows/                   
+├── web/                           
+├── test/                      
 ├── pubspec.yaml                   Arquivo de configuração do Flutter
 ├── pubspec.lock                   Versões travadas das dependências
 ├── README.md                      Este arquivo
