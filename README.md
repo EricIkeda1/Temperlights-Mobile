@@ -2,17 +2,17 @@
 
 **Temperlights-Mobile** é uma aplicação desenvolvida com **Flutter**, voltada para a digitalização e reconhecimento inteligente de etiquetas, estampas e códigos de barras. Utiliza **OCR (Reconhecimento Óptico de Caracteres)** e leitura de **códigos de barras** para extrair dados de imagens capturadas pela câmera ou selecionadas da galeria.
 
-A aplicação está integrada ao **Supabase** para autenticação de usuários e armazenamento em nuvem. É compatível com múltiplas plataformas: **Android**, **Web**, **Windows**, **Linux** e **macOS**.
+A aplicação está integrada ao **Supabase** para autenticação de usuários e armazenamento em nuvem. É compatível com múltiplas plataformas: **Android**, **Web** e **Windows**.
 
 ---
 
 ## Funcionalidades
 
 - Captura de imagens pela câmera ou galeria do dispositivo
-- Reconhecimento de texto com OCR (Google ML Kit ou alternativa)
+- Reconhecimento de texto com OCR 
 - Leitura de códigos de barras
 - Visualização de dataset de imagens (estampas de referência)
-- Integração com Supabase (login, armazenamento e autenticação)
+- Integração com Supabase 
 - Compatibilidade multiplataforma: Android, Web, Desktop (Windows, Linux, macOS)
 - Upload e leitura de dados na nuvem
 
