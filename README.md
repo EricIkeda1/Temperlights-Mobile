@@ -64,5 +64,6 @@ scanocr/
 ├── pubspec.yaml                   Arquivo de configuração do Flutter
 ├── pubspec.lock                   Versões travadas das dependências
 ├── README.md                      Este arquivo
-└── .gitignore, .metadata          Arquivos de controle do projeto
+├── .gitignore                  
+└── .metadata                      Arquivos de controle do projeto
 
