@@ -4,6 +4,8 @@
 
 A aplicação está integrada ao **Supabase** para autenticação de usuários e armazenamento em nuvem. É compatível com múltiplas plataformas: **Android**, **Web** e **Windows**.
 
+# Confira o funcionamento da aplicação no vídeo abaixo:
+
 https://github.com/user-attachments/assets/ad20dd1c-f689-422a-8f4a-77b2ab65c8cc
 
 ---
